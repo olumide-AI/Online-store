@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     //Class Scanner
@@ -14,7 +12,7 @@ public class Main {
     //Class File
     private static final String FILE_PATH = "products.csv";
     //Global variable cart
-    private static  List<Product> cart = new ArrayList<>();
+    private static final Map<String, Integer> cart = new HashMap<>();
     public static void main(String[] args) {
         //Home Screen
         boolean flag = true;
@@ -59,6 +57,7 @@ public class Main {
                     break;
                 case "S":
                     //method to search or filter for products
+                    filterProducts();
                     break;
                 case "A":
                     //method to add a product to cart
@@ -230,13 +229,14 @@ public class Main {
         try{
             System.out.println("What is the minimum price:");
             double minPrice = Double.parseDouble(scanner.nextLine().trim());
+
             System.out.println("What is the maximum price:");
             double maxPrice = Double.parseDouble(scanner.nextLine().trim());
 
             if (minPrice>maxPrice){
                 throw new IllegalArgumentException("Minimum price can't be greater than the Maximum Price");
             }
-            List<Product> productList = new ArrayList<>();
+            List<Product> productList = loadProducts();
             List<Product> filteredPriceList = new ArrayList<>();
 
             for(Product product : productList){
@@ -255,6 +255,10 @@ public class Main {
         catch (NumberFormatException e){
             System.out.println("Invalid input. please enter valid numbers for price");
         }
+
+    }
+
+    public static void checkOut(){
 
     }
 
